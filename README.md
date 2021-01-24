@@ -11,7 +11,10 @@ The server has to render only the index page and the framework will fetch and re
 
 The index page must have elements with <component/> name and  component,js, css attributes 
 
-example: <component html="components/layout/header.html" js="components/layout/header.js" css="components/layout/header.css"></component>
+example: 
+```html
+<component html="components/layout/header.html" js="components/layout/header.js" css="components/layout/header.css"></component>
+```
 
 The html attribute is required for the framework to fetch the component from the server
 
