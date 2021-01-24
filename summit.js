@@ -42,7 +42,7 @@ function initializeRouter() {
  * The components are fetch from the server on demand (lazy components)
  * After a component is fetched stored in a Map to be cached
  */
-function fetchComponents() {
+async function fetchComponents() {
   let componentsArray = document.getElementsByTagName("component");
   for (let i = 0; i < componentsArray.length; i++) {
     node = componentsArray[i];
@@ -54,22 +54,17 @@ function fetchComponents() {
         fetchComponents();
         continue;
       }
-      let xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-          if (this.status == 200) {
-            renderComponent(node, this.responseText, INITIAL_RENDER_COMPONENT)
-          }
-          if (this.status == 404) {
-            renderComponent(node, "Component not found", INITIAL_RENDER_COMPONENT)
-          }
-          CACHE_COMPONENTS.set(componentKey, this.responseText)
-          //recursion to fetch any inner components
-          fetchComponents();
-        }
-      };
-      xhttp.open("GET", componentKey, true);
-      xhttp.send();
+
+      try {
+        let response = await fetch(componentKey);
+        let component = await response.text();
+        renderComponent(node, component, INITIAL_RENDER_COMPONENT);
+        CACHE_COMPONENTS.set(componentKey, this.responseText)
+        //recursion to fetch any inner components
+        fetchComponents();
+      } catch (err) {
+        renderComponent(node, "Component not found", INITIAL_RENDER_COMPONENT)
+      }
       return;
     }
   }
