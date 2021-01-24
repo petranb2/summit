@@ -21,8 +21,6 @@
 
 
 // configuration consts
-// Base application URL 
-const BASE_APP_URL = "/pms/";
 // the dir of the components at the server
 const BASE_COMPONENT_DIR = "components/";
 // the main component to render components with router
@@ -115,7 +113,7 @@ function renderComponent(node, component, initialRender = true) {
   // load js file
   if (jsFile != null && initialRender) {
     let script = document.createElement('script');
-    script.setAttribute('src', BASE_APP_URL + jsFile);
+    script.setAttribute('src', jsFile);
     document.head.appendChild(script);
     node.removeAttribute("js");
   }
@@ -123,7 +121,7 @@ function renderComponent(node, component, initialRender = true) {
   // load css file
   if (cssFile != null && initialRender) {
     let css = document.createElement('link');
-    css.setAttribute('href', BASE_APP_URL + cssFile);
+    css.setAttribute('href',cssFile);
     css.setAttribute("rel", "stylesheet");
     document.head.appendChild(css);
     node.removeAttribute("css");
