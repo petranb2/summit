@@ -1,5 +1,6 @@
 # summit
 This is a minimal SPA framework
+
 This is a minimal spa (single page application) framework
 Insipired by react, vue and svelte
 created by petros koulianos
