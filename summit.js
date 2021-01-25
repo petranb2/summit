@@ -59,7 +59,7 @@ async function fetchComponents() {
         let response = await fetch(componentKey);
         let component = await response.text();
         renderComponent(node, component, INITIAL_RENDER_COMPONENT);
-        CACHE_COMPONENTS.set(componentKey, this.responseText)
+        CACHE_COMPONENTS.set(componentKey, component)
         //recursion to fetch any inner components
         fetchComponents();
       } catch (err) {
